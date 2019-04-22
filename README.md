@@ -233,7 +233,15 @@ Standardně je aplikace v teplých červeno-žlutých barvách. Přidej do CSS d
 
 Vzhledem k momentálnímu letnímu počasí budeš muset chladné počasí asi nasimulovat změnou dat, abys vyzkoušela, zda ti to funguje :)
 
-### **9. Zvuky**
+### **9. Přepínač mezi jednotkami**
+
+Na světě stále existují národy, které si bláhově myslí, že je dobrý nápad počítat po tuctech a kopách, meřit vzdálenost v mílích a stopách, teplotu ve Fahreinheitech. No, hadát se s nimi nebudeme, nemá to cenu.
+
+Dodělej do aplikace přepínač mezi metrickými a imperiálními jednotkami. Půjde hlavně o zobrazení teploty ve stupních Celsia nebo Fahrenheita, ale změna se týká například i rychlostí větru, která bude v mílích za hodinu místo kilometrů. Budeš muset nejen zobrazovat jiná čísla, ale změnit i popis jednotek.
+
+Můžeš si vybrat ze dvou způsobů, jak to provést - buď se budeš ptát přímo API na údaje v metrických nebo imperiálních jednotkách. Nebo si necháš údaje ze serveru posílat stále v metrickém systému a při kliknutí na přepínač můžeš hodnoty přepočítat. Vzorečky najdeš na internetu (např. [zde](https://www.metric-conversions.org/)).
+
+### **10. Zvuky**
 
 Toto už je totální overkill pro ty, kdo opravdu nemají nic jiného na práci. Sežeň si různé zvuky a podle různých typů počasí ([dokumentace](https://openweathermap.org/weather-conditions)) přehrávej zvuk deště, bouřky, včely bzučící na louce (=sluníčko), apod.
 
