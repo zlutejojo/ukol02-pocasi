@@ -247,6 +247,10 @@ Toto už je totální overkill pro ty, kdo opravdu nemají nic jiného na práci
 
 Nezpomeň, že zvuky jsou často otravné a aplikace by měla mít tlačítko, kterým jdou vypnout.
 
+### **11. Tlačítko pro přečtení počasí hlasem**
+
+Pokud se cítíš opravdu odvážně a stále nemáš dost, můžeš zkusit Speech Synthesis API ([dokumentace](https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis)) a přidat do aplikace tlačítko, které nechá hlavní údaje o počasí přečíst počítačovým hlasem.
+
 **Tak, myslím, že na jeden domácí úkol už to stačí :)**
 
 
