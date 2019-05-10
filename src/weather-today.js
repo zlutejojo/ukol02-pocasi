@@ -10,14 +10,22 @@ export default class Weather {
     }
 
 
-    getWeather(){
-        fetch(API_BASE + 'weather?q=Brno,cz&units=metric&lang=cz&appid=' + API_KEY)
+    async getWeather(city){
+
+        /*
+        // kdyz pouziju tuhle cast kodu, tak u funkce nebude async
+
+        fetch(API_BASE + 'weather?q=' + city + '&units=metric&lang=cz&appid=' + API_KEY)
         .then(response => response.json())
         .then(dataFromAPI => {
         
         console.log(dataFromAPI);
+        
         this.showWeather(dataFromAPI);
     })
+    */  
+        
+        return await fetch(API_BASE + 'weather?q=' + city + '&units=metric&lang=cz&appid=' + API_KEY).then(response => response.json());   
     }
 
 
@@ -31,6 +39,7 @@ export default class Weather {
 
         //vraci kus html, ktery chci vlozit do html v indexu
         let krasnaIkona = getWeatherIcon(dataFromAPI.weather[0].id, dataFromAPI.weather[0].icon);
+        console.log("today ikona " + dataFromAPI.weather[0].icon);
         let ikonaHTMLElement = document.querySelector('#ikona');
         ikonaHTMLElement.innerHTML = krasnaIkona;
         

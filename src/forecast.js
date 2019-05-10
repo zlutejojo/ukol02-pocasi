@@ -10,12 +10,12 @@ export default class Forecast {
     }
 
 
-    getForecast() {
+    getForecast(city) {
 
         let unixTimeStampFormat = new UnixTimeStampFormat();
         let forecastMaxTemperature = new ForecastMaxTemperature();
 
-        fetch(API_BASE + 'forecast?q=Brno,cz&units=metric&lang=cz&appid=' + API_KEY)
+        fetch(API_BASE + 'forecast?q=' + city + '&units=metric&lang=cz&appid=' + API_KEY)
             .then(response => response.json())
             .then(dataFromAPI => {
                 this.showForecast(dataFromAPI);
@@ -30,10 +30,11 @@ export default class Forecast {
         let forecastMaxTemperature = new ForecastMaxTemperature();
         let unixTimeStampFormat = new UnixTimeStampFormat();
 
-        let daysFirstLastIndex = forecastMaxTemperature.getDaysFirstLastIndex(dataFromAPI.list[0].dt, 4);
+        let daysFirstLastIndex = forecastMaxTemperature.getListFirstLastIndexOfDays(dataFromAPI.list[0].dt, 4);
         let i;
         for (i = 0; i < daysFirstLastIndex.length; i++) {
             let unixTimeStamp = dataFromAPI.list[daysFirstLastIndex[i][0]].dt;
+            console.log("hodina" + unixTimeStampFormat.getHourFromTimeStamp(unixTimeStamp));
 
             html += `
             <div class="forecast">
@@ -49,7 +50,9 @@ export default class Forecast {
                     ${forecastMaxTemperature.getMaxTemperature(dataFromAPI, daysFirstLastIndex[i][0], daysFirstLastIndex[i][1])}
                      °C 
                 </div>
-          </div>`
+          </div>`  
+
+          console.log("forecast ikona" + dataFromAPI.list[i].weather[0].icon);
         }
         predpovedElement.innerHTML = html;
     }

@@ -7,7 +7,7 @@ export default class ForecastMaxTemperature {
     }
 
     // získám pole, které obsahuje pole s dvěma indexy, které mi udávají první a poslední záznam pro jeden den
-    getDaysFirstLastIndex(timeStampFirstItem, daysToShow){
+    getListFirstLastIndexOfDays(timeStampFirstItem, daysToShow){
         let unixTimeStampFormat = new UnixTimeStampFormat();
         let firstItemHour = unixTimeStampFormat.getHourFromTimeStamp(timeStampFirstItem);
         // časový posun - v Brně je o hodinu méně tj. dostávám časy 02:00, 05:00 atd.
@@ -33,6 +33,8 @@ export default class ForecastMaxTemperature {
         let maxTemperature = -100;
         let i;
         for(i = firstIndex; i <= lastIndex; i++) {
+
+            //console.log("hledam nejvyssi teplotu " + forecastJSON.list[i].main.temp_max);
             
             let temperature = forecastJSON.list[i].main.temp_max;
             if(temperature > maxTemperature) {
