@@ -10,7 +10,7 @@ let serviceBtn = new ServiceBtn();
 weather.getWeather("brno").then(weatherTodayJSON =>
     weather.showWeather(weatherTodayJSON)
 );
-forecast.getForecast("brno");
+forecast.getForecast("brno,cz");
 
 //nastavení buttonů
 let brnoBtn = document.querySelector('#brno');

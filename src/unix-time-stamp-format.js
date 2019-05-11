@@ -16,7 +16,6 @@ export default class UnixTimeStampFormat {
     getMinuteFromTimeStamp(unixTimeStamp) {
         let myDate = this.createDate(unixTimeStamp);
         return myDate.getMinutes();
-
     }
 
     getDateFromTimeStamp(unixTimeStamp) {
@@ -61,6 +60,14 @@ export default class UnixTimeStampFormat {
         let myDate = this.createDate(unixTimeStamp);
         // měsíce jsou číslovány od nula, takže + 1
         return myDate.getMonth() + 1;
+    }
+
+    formatOnePlaceNumberToTwo(numberToFormat){
+        let number = numberToFormat;
+        if(number < 10) {
+            number = '0' + number;
+        }
+        return number;
     }
 
 }

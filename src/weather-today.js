@@ -47,9 +47,13 @@ export default class Weather {
         document.querySelector('#vlhkost').textContent = dataFromAPI.main.humidity;
 
         let sunrise = dataFromAPI.sys.sunrise; 
-        document.querySelector('#vychod').textContent = unixTimeStampFormat.getHourFromTimeStamp(sunrise) + ":" + unixTimeStampFormat.getMinuteFromTimeStamp(sunrise);
+        document.querySelector('#vychod').textContent = 
+            unixTimeStampFormat.formatOnePlaceNumberToTwo(unixTimeStampFormat.getHourFromTimeStamp(sunrise))
+             + ":" + unixTimeStampFormat.formatOnePlaceNumberToTwo(unixTimeStampFormat.getMinuteFromTimeStamp(sunrise));
 
         let sunset = dataFromAPI.sys.sunset;
-        document.querySelector('#zapad').textContent = unixTimeStampFormat.getHourFromTimeStamp(sunset) + ":" + unixTimeStampFormat.getMinuteFromTimeStamp(sunset);
+        document.querySelector('#zapad').textContent = 
+            unixTimeStampFormat.formatOnePlaceNumberToTwo(unixTimeStampFormat.getHourFromTimeStamp(sunset))
+            + ":" + unixTimeStampFormat.formatOnePlaceNumberToTwo(unixTimeStampFormat.getMinuteFromTimeStamp(sunset));
     }
 }

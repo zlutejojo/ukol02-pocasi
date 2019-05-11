@@ -11,10 +11,10 @@ export default class ServiceBtn {
 
     respondClick(e) { 
         
-        let city = e.target.id;
-        console.log(city);
-        weather.getWeather(city).then(weatherTodayJSON =>
-            weather.showWeather(weatherTodayJSON)
+        let city = e.target.dataset.city;
+        console.log("mesto "+ city);
+        weather.getWeather(city).then(weatherTodayFromAPI =>
+            weather.showWeather(weatherTodayFromAPI)
         );
         forecast.getForecast(city);
     } 

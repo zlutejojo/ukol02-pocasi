@@ -30,11 +30,16 @@ export default class Forecast {
         let forecastMaxTemperature = new ForecastMaxTemperature();
         let unixTimeStampFormat = new UnixTimeStampFormat();
 
+        console.log("synde,au hodiny" + unixTimeStampFormat.getHourFromTimeStamp(1557520602));
+        console.log("synde,au minuty" + unixTimeStampFormat.getMinuteFromTimeStamp(1557520602));
+        console.log("synde,us hodiny" + unixTimeStampFormat.getHourFromTimeStamp(1557484948));
+        console.log("synde,us minuty" + unixTimeStampFormat.getMinuteFromTimeStamp(1557484948));
+
+
         let daysFirstLastIndex = forecastMaxTemperature.getListFirstLastIndexOfDays(dataFromAPI.list[0].dt, 4);
         let i;
         for (i = 0; i < daysFirstLastIndex.length; i++) {
             let unixTimeStamp = dataFromAPI.list[daysFirstLastIndex[i][0]].dt;
-            console.log("hodina" + unixTimeStampFormat.getHourFromTimeStamp(unixTimeStamp));
 
             html += `
             <div class="forecast">
