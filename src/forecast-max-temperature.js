@@ -10,9 +10,6 @@ export default class ForecastMaxTemperature {
     getListFirstLastIndexOfDays(timeStampFirstItem, daysToShow){
         let unixTimeStampFormat = new UnixTimeStampFormat();
         let firstItemHour = unixTimeStampFormat.getHourFromTimeStamp(timeStampFirstItem);
-
-        console.log("time forecast hour" + unixTimeStampFormat.getHourFromTimeStamp(1557522000));
-        console.log("time forecast date " + unixTimeStampFormat.getDateFromTimeStamp(1557522000));
  
         /* získám index posledního záznamu dnešního dne 
         vím, že v mém časovém pásmu mám tyto záznamy 0:02, 5:00, 8:00, 11:00, 14:00, 17:00, 20:00 a 23:00
@@ -44,7 +41,7 @@ export default class ForecastMaxTemperature {
         let maxTemperature = -100;
         let i;
         for(i = firstIndex; i <= lastIndex; i++) {
-            //console.log("hledam nejvyssi teplotu " + dataFromAPI.list[i].main.temp_max);
+            console.log("hledam nejvyssi teplotu " + dataFromAPI.list[i].main.temp_max);
             let temperature = dataFromAPI.list[i].main.temp_max;
             if(temperature > maxTemperature) {
                 maxTemperature = temperature;

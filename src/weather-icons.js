@@ -21,6 +21,15 @@ export default function getWeatherIcon(code, img) {
   return `<i class="${prefix + icon}"></i>`;
 }
 
+export function convertNightIconToDay(icon){
+  let lastLetter = icon.slice(-1);
+  if(lastLetter === "n"){
+    icon = icon.replace("n", "d");
+  }
+  console.log("format ikon " + icon);
+  return icon;
+}
+
 
 // mapping of Weather Icons (https://github.com/erikflowers/weather-icons)
 // to OpenWeatherMap weather codes
