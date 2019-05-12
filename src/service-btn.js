@@ -10,12 +10,13 @@ export default class ServiceBtn {
     }
 
     respondClick(e) { 
-        
         let city = e.target.dataset.city;
-        console.log("mesto "+ city);
         weather.getWeather(city).then(weatherTodayFromAPI =>
             weather.showWeather(weatherTodayFromAPI)
         );
-        forecast.getForecast(city);
+
+        forecast.getForecast(city).then(forecastJSON =>
+            forecast.showForecast(forecastJSON)
+        );        
     } 
 }

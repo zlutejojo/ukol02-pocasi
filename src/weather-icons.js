@@ -26,7 +26,6 @@ export function convertNightIconToDay(icon){
   if(lastLetter === "n"){
     icon = icon.replace("n", "d");
   }
-  console.log("format ikon " + icon);
   return icon;
 }
 

@@ -2,6 +2,7 @@ import getWeatherIcon from './weather-icons';
 import UnixTimeStampFormat from './unix-time-stamp-format';
 import ForecastMaxTemperature from './forecast-max-temperature';
 import {convertNightIconToDay} from './weather-icons';
+import TimeZoneFormat from './time-zone-format';
 
 const API_KEY = 'd759207c30176fd30fa903932a54668a';
 const API_BASE = 'https://api.openweathermap.org/data/2.5/';
@@ -11,16 +12,28 @@ export default class Forecast {
     }
 
 
-    getForecast(city) {
-
-        let unixTimeStampFormat = new UnixTimeStampFormat();
-        let forecastMaxTemperature = new ForecastMaxTemperature();
-
+    async getForecast(city) {
+        /*
         fetch(API_BASE + 'forecast?q=' + city + '&units=metric&lang=cz&appid=' + API_KEY)
             .then(response => response.json())
             .then(dataFromAPI => {
                 this.showForecast(dataFromAPI);
             })
+
+            */
+        let dataFromAPI = await fetch(API_BASE + 'forecast?q=' + city + '&units=metric&lang=cz&appid=' + API_KEY).then(response => response.json());
+        let timeZoneFormat = new TimeZoneFormat();
+        
+        //tady si upravím všechny timeStamp z API časovým posunem země, pro kterou budu zobrazovat data
+        //POZOR! nezměnila jsem si položku dt_text v listu podle časového posunu, takže když ji budu chtít použít, budu ji muset upravit
+        let timeShift = timeZoneFormat.timeZoneFormat(city);
+        let i;
+        for (i = 0; i < dataFromAPI.cnt; i++) {
+            //console.log("dt" + dataFromAPI.list[i].dt + " cnt " + dataFromAPI.cnt);
+            dataFromAPI.list[i].dt = dataFromAPI.list[i].dt + timeShift;
+        }
+        
+        return dataFromAPI;     
     }
 
 
@@ -30,10 +43,11 @@ export default class Forecast {
         let predpovedElement = document.querySelector('#predpoved');
         let forecastMaxTemperature = new ForecastMaxTemperature();
         let unixTimeStampFormat = new UnixTimeStampFormat();
-        let daysFirstLastIndex = forecastMaxTemperature.getListFirstLastIndexOfDays(dataFromAPI.list[0].dt, 4);
+        let daysFirstLastIndex = forecastMaxTemperature.getListFirstLastIndexOfDays(dataFromAPI, 4);
         let i;
         for (i = 0; i < daysFirstLastIndex.length; i++) {
             let unixTimeStamp = dataFromAPI.list[daysFirstLastIndex[i][0]].dt;
+            
 
             html += `
             <div class="forecast">

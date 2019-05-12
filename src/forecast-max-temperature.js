@@ -7,21 +7,21 @@ export default class ForecastMaxTemperature {
     }
 
     // získám pole, které obsahuje pole s dvěma indexy, které mi udávají první a poslední záznam pro jeden den
-    getListFirstLastIndexOfDays(timeStampFirstItem, daysToShow){
+    getListFirstLastIndexOfDays(dataFromAPI, daysToShow){
         let unixTimeStampFormat = new UnixTimeStampFormat();
-        let firstItemHour = unixTimeStampFormat.getHourFromTimeStamp(timeStampFirstItem);
+        let firstItemDate = unixTimeStampFormat.getDateFromTimeStamp(dataFromAPI.list[0].dt);
  
-        /* získám index posledního záznamu dnešního dne 
-        vím, že v mém časovém pásmu mám tyto záznamy 0:02, 5:00, 8:00, 11:00, 14:00, 17:00, 20:00 a 23:00
-        proto odečítám hodiny první zobrazení položky od 23 hodin (nejvyšší možný počet hodin)
-        záznamy jsou po 3 hodinách, proto když podělím získaný počet hodin třema, dostanu index posledního záznamu (tj. toho ve 23 hod) dnešního dne
-        */
-        console.log("prvni item " + firstItemHour + "hour");
-        let actualDayLastIndexItem = (23 - firstItemHour)/3;
+        // hledám první záznam, který má odlišný den v datu než první záznam API, a to je první záznam následující dne (a ten hledám)
+        let date = firstItemDate;
+        let counter = 0;      
+        while (date === firstItemDate) {
+            // tady přičítám 1, protože chci srovnávat až s druhým indexem v seznamu a zároveň mi to sníží counter o 1, čímž získám přímo index záznamu (indexy jsou od nula)
+            date = unixTimeStampFormat.getDateFromTimeStamp(dataFromAPI.list[counter+1].dt);
+            counter += 1; 
+        }
     
-        console.log("index " +  actualDayLastIndexItem);
         //index, od kterého budu získávat záznamy, tj. předpoveď začíná zítřejším dnem
-        let startIndex = actualDayLastIndexItem + 1;
+        let startIndex = counter;
         
         // záznamy získávám pro zadaný počet dnů, proto cyklus, který mi do pole daysFirstLastIndex uloží další pole s prvním a posledním indexem jednoho dne
         let daysFirstLastIndex = [];
@@ -41,8 +41,8 @@ export default class ForecastMaxTemperature {
         let maxTemperature = -100;
         let i;
         for(i = firstIndex; i <= lastIndex; i++) {
-            console.log("hledam nejvyssi teplotu " + dataFromAPI.list[i].main.temp_max);
-            let temperature = dataFromAPI.list[i].main.temp_max;
+            //console.log("hledam nejvyssi teplotu " + dataFromAPI.list[i].main.temp_max + " cas je " + unixTimeStampFormat.getDateFromTimeStamp(dataFromAPI.list[i].dt) + " " + unixTimeStampFormat.getHourFromTimeStamp(dataFromAPI.list[i].dt));
+            let temperature = dataFromAPI.list[i].main.temp;
             if(temperature > maxTemperature) {
                 maxTemperature = temperature;
             }
