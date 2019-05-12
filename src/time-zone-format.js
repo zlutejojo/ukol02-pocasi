@@ -5,9 +5,14 @@ export default class TimeZoneFormat {
 
     }
 
-    //TODO načítat myTimeZone ze systému, takto tam mám napevno časové pásmo pro ČR a to ještě pro letní čas, tj. +2 hodiny (zimní čas je +1)
+    //POZOR: offset - nejsem si jistá, zda se to bude správně chovat i pro letní čas, kdy je rozdíl 1 hodina místo 2
     timeZoneFormat(city) {
-        let myTimeZone = this.convertHourToSecond(2);
+        
+        //1. vrací můj časový posun v minutách
+        //2. pokud jsem s časem dopředu tak mi to vrátí záporné číslo
+        let offset = new Date().getTimezoneOffset();
+        offset = offset / -60;
+        let myTimeZone = this.convertHourToSecond(offset);
         let time;
         switch (city) {
             case "brno,cz":

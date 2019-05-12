@@ -32,7 +32,6 @@ export default class Forecast {
             //console.log("dt" + dataFromAPI.list[i].dt + " cnt " + dataFromAPI.cnt);
             dataFromAPI.list[i].dt = dataFromAPI.list[i].dt + timeShift;
         }
-        
         return dataFromAPI;     
     }
 
@@ -47,8 +46,6 @@ export default class Forecast {
         let i;
         for (i = 0; i < daysFirstLastIndex.length; i++) {
             let unixTimeStamp = dataFromAPI.list[daysFirstLastIndex[i][0]].dt;
-            
-
             html += `
             <div class="forecast">
                 <div class="forecast__day">
